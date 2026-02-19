@@ -25,6 +25,7 @@ data class AlbumUiState(
     val showCamera: Boolean = false,
     val showTagSheet: Boolean = false,
     val selectedImageId: Long? = null,
+    val previewImageId: Long? = null,
     val message: String? = null
 )
 
@@ -83,10 +84,13 @@ class AlbumViewModel @Inject constructor(
         _uiState.update { it.copy(showTagSheet = false, selectedImageId = null) }
     }
 
-    fun createTag(name: String) {
+    fun createTag(name: String, imageId: Long? = null) {
         if (name.isBlank()) return
         viewModelScope.launch {
-            repository.createTag(name.trim())
+            val tagId = repository.createTag(name.trim())
+            if (imageId != null) {
+                repository.assignTagToImage(imageId, tagId)
+            }
         }
     }
 
@@ -100,6 +104,14 @@ class AlbumViewModel @Inject constructor(
         viewModelScope.launch {
             repository.removeTagFromImage(imageId, tagId)
         }
+    }
+
+    fun showPreview(imageId: Long) {
+        _uiState.update { it.copy(previewImageId = imageId) }
+    }
+
+    fun hidePreview() {
+        _uiState.update { it.copy(previewImageId = null) }
     }
 
     fun dismissMessage() {

@@ -27,6 +27,7 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.LocalOffer
 import androidx.compose.material.icons.filled.Search
@@ -93,11 +94,23 @@ fun AlbumScreen(
         TagBottomSheet(
             allTags = allTags,
             assignedTagIds = assignedTagIds,
-            onCreateTag = { viewModel.createTag(it) },
+            onCreateTag = { viewModel.createTag(it, imageId) },
             onAssignTag = { viewModel.assignTag(imageId, it) },
             onRemoveTag = { viewModel.removeTag(imageId, it) },
             onDismiss = { viewModel.hideTagSheet() }
         )
+    }
+
+    // Image Preview
+    if (uiState.previewImageId != null) {
+        val imageId = uiState.previewImageId!!
+        val selectedImage = images.find { it.image.id == imageId }
+        if (selectedImage != null) {
+            ImagePreviewDialog(
+                imagePath = selectedImage.image.filePath,
+                onDismiss = { viewModel.hidePreview() }
+            )
+        }
     }
 
     Box(
@@ -205,6 +218,7 @@ fun AlbumScreen(
                         ) {
                             ImageGridItem(
                                 imageWithTags = imageWithTags,
+                                onImageClick = { viewModel.showPreview(imageWithTags.image.id) },
                                 onTagClick = { viewModel.showTagSheet(imageWithTags.image.id) }
                             )
                         }
@@ -256,6 +270,7 @@ fun AlbumScreen(
 @Composable
 private fun ImageGridItem(
     imageWithTags: com.ranesvision.app.data.local.entity.ImageWithTags,
+    onImageClick: () -> Unit,
     onTagClick: () -> Unit
 ) {
     Column(
@@ -271,7 +286,8 @@ private fun ImageGridItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
-                .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)),
+                .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
+                .clickable { onImageClick() },
             contentScale = ContentScale.Crop
         )
 
@@ -306,6 +322,47 @@ private fun ImageGridItem(
                     color = NeonBlueBright,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ImagePreviewDialog(
+    imagePath: String,
+    onDismiss: () -> Unit
+) {
+    androidx.compose.ui.window.Dialog(
+        onDismissRequest = onDismiss,
+        properties = androidx.compose.ui.window.DialogProperties(
+            usePlatformDefaultWidth = false
+        )
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(SpaceBlack)
+        ) {
+            AsyncImage(
+                model = imagePath,
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Fit
+            )
+
+            // Close button
+            androidx.compose.material3.IconButton(
+                onClick = onDismiss,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(16.dp)
+                    .background(Color.Black.copy(alpha = 0.5f), androidx.compose.foundation.shape.CircleShape)
+            ) {
+                Icon(
+                    Icons.Default.Close,
+                    contentDescription = "Close",
+                    tint = Color.White
                 )
             }
         }

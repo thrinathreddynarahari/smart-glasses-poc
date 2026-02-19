@@ -133,7 +133,7 @@ fun DashboardScreen(
                 modifier = Modifier
                     .fillMaxWidth(0.55f)
                     .padding(horizontal = 16.dp)
-                    .clip(RoundedCornerShape(24.dp)),
+                    .clip(RoundedCornerShape(5.dp)),
                 contentScale = ContentScale.FillWidth
             )
 
