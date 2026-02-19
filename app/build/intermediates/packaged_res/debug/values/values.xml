@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#0A0E1A</color>
+    <string name="add_tag">Add Tag</string>
+    <string name="album">Album</string>
+    <string name="app_info">App Info</string>
+    <string name="app_name">Ranes Vision</string>
+    <string name="app_version">Version</string>
+    <string name="assign_tags">Assign Tags</string>
+    <string name="capture">Capture</string>
+    <string name="connect">Connect</string>
+    <string name="connecting_devices">Connecting devices</string>
+    <string name="connection_failed">Connection failed</string>
+    <string name="connection_successful">Connection successful</string>
+    <string name="create_tag">Create Tag</string>
+    <string name="disconnect_device">Disconnect Device</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="disconnecting">Disconnecting...</string>
+    <string name="error_bluetooth_disabled">Bluetooth is disabled. Please enable Bluetooth to scan for devices.</string>
+    <string name="error_connection_failed">Unable to connect to device. Please ensure the device is nearby and try again.</string>
+    <string name="error_device_not_found">Device not found. It may be out of range.</string>
+    <string name="error_scan_failed">Device scan failed. Please try again.</string>
+    <string name="error_timeout">Operation timed out. Please try again.</string>
+    <string name="error_unknown">An unexpected error occurred. Please try again.</string>
+    <string name="home">Home</string>
+    <string name="my_profile">My profile</string>
+    <string name="no_devices_found">No devices found</string>
+    <string name="no_images_found">No images found</string>
+    <string name="photo_saved">Photo saved successfully</string>
+    <string name="scan_devices">Scan Devices</string>
+    <string name="scanning">Scanning...</string>
+    <string name="scanning_nearby_devices">Scanning nearby devices...</string>
+    <string name="sdk_version">SDK Version</string>
+    <string name="search_by_tag">Search by tag</string>
+    <string name="tag_name">Tag name</string>
+    <style name="Theme.RanesVision" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+</resources>

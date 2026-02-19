@@ -1,0 +1,227 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.ranesvision.app"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="34" />
+10
+11    <!-- Camera -->
+12    <uses-permission android:name="android.permission.CAMERA" />
+12-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:6:5-65
+12-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:6:22-62
+13
+14    <uses-feature
+14-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:7:5-85
+15        android:name="android.hardware.camera"
+15-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:7:19-57
+16        android:required="false" />
+16-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:7:58-82
+17
+18    <!-- Bluetooth -->
+19    <uses-permission android:name="android.permission.BLUETOOTH" />
+19-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:10:5-68
+19-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:10:22-65
+20    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+20-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:11:5-74
+20-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:11:22-71
+21    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+21-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:12:5-73
+21-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:12:22-70
+22    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+22-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:13:5-76
+22-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:13:22-73
+23
+24    <!-- Location (required for BLE scanning) -->
+25    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+25-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:16:5-79
+25-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:16:22-76
+26    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+26-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:17:5-81
+26-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:17:22-78
+27
+28    <!-- Network -->
+29    <uses-permission android:name="android.permission.INTERNET" />
+29-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:20:5-67
+29-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:20:22-64
+30
+31    <!-- Storage -->
+32    <uses-permission
+32-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:23:5-24:38
+33        android:name="android.permission.READ_EXTERNAL_STORAGE"
+33-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:23:22-77
+34        android:maxSdkVersion="32" />
+34-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:24:9-35
+35    <uses-permission
+35-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:25:5-26:38
+36        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+36-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:25:22-78
+37        android:maxSdkVersion="32" />
+37-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:26:9-35
+38    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+38-->[glasses_sdk_20250723_v01.aar] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\9ad147c26bf0c0ae94ef7b18ce979234\transformed\glasses_sdk_20250723_v01\AndroidManifest.xml:9:5-77
+38-->[glasses_sdk_20250723_v01.aar] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\9ad147c26bf0c0ae94ef7b18ce979234\transformed\glasses_sdk_20250723_v01\AndroidManifest.xml:9:22-74
+39
+40    <permission
+40-->[androidx.core:core:1.12.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\e1b2ee99c9859ef10a1634cbf44c3814\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+41        android:name="com.ranesvision.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+41-->[androidx.core:core:1.12.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\e1b2ee99c9859ef10a1634cbf44c3814\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+42        android:protectionLevel="signature" />
+42-->[androidx.core:core:1.12.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\e1b2ee99c9859ef10a1634cbf44c3814\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+43
+44    <uses-permission android:name="com.ranesvision.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+44-->[androidx.core:core:1.12.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\e1b2ee99c9859ef10a1634cbf44c3814\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+44-->[androidx.core:core:1.12.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\e1b2ee99c9859ef10a1634cbf44c3814\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+45
+46    <application
+46-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:28:5-49:19
+47        android:name="com.ranesvision.app.RanesVisionApp"
+47-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:29:9-39
+48        android:allowBackup="true"
+48-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:30:9-35
+49        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+49-->[androidx.core:core:1.12.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\e1b2ee99c9859ef10a1634cbf44c3814\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+50        android:debuggable="true"
+51        android:extractNativeLibs="false"
+52        android:icon="@mipmap/ic_launcher"
+52-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:31:9-43
+53        android:label="@string/app_name"
+53-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:32:9-41
+54        android:requestLegacyExternalStorage="true"
+54-->[glasses_sdk_20250723_v01.aar] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\9ad147c26bf0c0ae94ef7b18ce979234\transformed\glasses_sdk_20250723_v01\AndroidManifest.xml:17:9-52
+55        android:roundIcon="@mipmap/ic_launcher_round"
+55-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:33:9-54
+56        android:supportsRtl="true"
+56-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:34:9-35
+57        android:theme="@style/Theme.RanesVision" >
+57-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:35:9-49
+58        <activity
+58-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:38:9-47:20
+59            android:name="com.ranesvision.app.MainActivity"
+59-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:39:13-41
+60            android:exported="true"
+60-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:40:13-36
+61            android:theme="@style/Theme.RanesVision"
+61-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:42:13-53
+62            android:windowSoftInputMode="adjustResize" >
+62-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:41:13-55
+63            <intent-filter>
+63-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:43:13-46:29
+64                <action android:name="android.intent.action.MAIN" />
+64-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:44:17-69
+64-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:44:25-66
+65
+66                <category android:name="android.intent.category.LAUNCHER" />
+66-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:45:17-77
+66-->D:\Projects\ranes-poc-3\app\src\main\AndroidManifest.xml:45:27-74
+67            </intent-filter>
+68        </activity>
+69
+70        <service
+70-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a21c601b9595d21af7f8918e0b0719e1\transformed\camera-camera2-1.3.1\AndroidManifest.xml:24:9-33:19
+71            android:name="androidx.camera.core.impl.MetadataHolderService"
+71-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a21c601b9595d21af7f8918e0b0719e1\transformed\camera-camera2-1.3.1\AndroidManifest.xml:25:13-75
+72            android:enabled="false"
+72-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a21c601b9595d21af7f8918e0b0719e1\transformed\camera-camera2-1.3.1\AndroidManifest.xml:26:13-36
+73            android:exported="false" >
+73-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a21c601b9595d21af7f8918e0b0719e1\transformed\camera-camera2-1.3.1\AndroidManifest.xml:27:13-37
+74            <meta-data
+74-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a21c601b9595d21af7f8918e0b0719e1\transformed\camera-camera2-1.3.1\AndroidManifest.xml:30:13-32:89
+75                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+75-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a21c601b9595d21af7f8918e0b0719e1\transformed\camera-camera2-1.3.1\AndroidManifest.xml:31:17-103
+76                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+76-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a21c601b9595d21af7f8918e0b0719e1\transformed\camera-camera2-1.3.1\AndroidManifest.xml:32:17-86
+77        </service>
+78
+79        <activity
+79-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\ff69b74f6f46ab9cb9dbb4e1f1cff4ae\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+80            android:name="androidx.compose.ui.tooling.PreviewActivity"
+80-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\ff69b74f6f46ab9cb9dbb4e1f1cff4ae\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+81            android:exported="true" />
+81-->[androidx.compose.ui:ui-tooling-android:1.6.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\ff69b74f6f46ab9cb9dbb4e1f1cff4ae\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+82        <activity
+82-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\12f39efd2ec1499fe9c400774005e9c8\transformed\ui-test-manifest-1.6.0\AndroidManifest.xml:23:9-25:39
+83            android:name="androidx.activity.ComponentActivity"
+83-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\12f39efd2ec1499fe9c400774005e9c8\transformed\ui-test-manifest-1.6.0\AndroidManifest.xml:24:13-63
+84            android:exported="true" />
+84-->[androidx.compose.ui:ui-test-manifest:1.6.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\12f39efd2ec1499fe9c400774005e9c8\transformed\ui-test-manifest-1.6.0\AndroidManifest.xml:25:13-36
+85
+86        <provider
+86-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\b724606b85cc4228f65df8d08255b5b3\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+87            android:name="androidx.startup.InitializationProvider"
+87-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\b724606b85cc4228f65df8d08255b5b3\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+88            android:authorities="com.ranesvision.app.androidx-startup"
+88-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\b724606b85cc4228f65df8d08255b5b3\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+89            android:exported="false" >
+89-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\b724606b85cc4228f65df8d08255b5b3\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+90            <meta-data
+90-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\b724606b85cc4228f65df8d08255b5b3\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+91                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+91-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\b724606b85cc4228f65df8d08255b5b3\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+92                android:value="androidx.startup" />
+92-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\b724606b85cc4228f65df8d08255b5b3\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+93            <meta-data
+93-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\fe4b9b4dd215a4f324c26eb10f2060ba\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+94                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+94-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\fe4b9b4dd215a4f324c26eb10f2060ba\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+95                android:value="androidx.startup" />
+95-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\fe4b9b4dd215a4f324c26eb10f2060ba\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+96            <meta-data
+96-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+97                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+97-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+98                android:value="androidx.startup" />
+98-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+99        </provider>
+100
+101        <service
+101-->[androidx.room:room-runtime:2.6.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\9afd3b13fd8ecf8bc8c85330be511881\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+102            android:name="androidx.room.MultiInstanceInvalidationService"
+102-->[androidx.room:room-runtime:2.6.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\9afd3b13fd8ecf8bc8c85330be511881\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+103            android:directBootAware="true"
+103-->[androidx.room:room-runtime:2.6.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\9afd3b13fd8ecf8bc8c85330be511881\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+104            android:exported="false" />
+104-->[androidx.room:room-runtime:2.6.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\9afd3b13fd8ecf8bc8c85330be511881\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+105
+106        <receiver
+106-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+107            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+107-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+108            android:directBootAware="false"
+108-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+109            android:enabled="true"
+109-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+110            android:exported="true"
+110-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+111            android:permission="android.permission.DUMP" >
+111-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+112            <intent-filter>
+112-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+113                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+113-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+113-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+114            </intent-filter>
+115            <intent-filter>
+115-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+116                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+116-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+116-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+117            </intent-filter>
+118            <intent-filter>
+118-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+119                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+119-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+119-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+120            </intent-filter>
+121            <intent-filter>
+121-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+122                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+122-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+122-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Thrinath Narahari\.gradle\caches\transforms-3\a8f17309a0781995a158fded301f2aa1\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+123            </intent-filter>
+124        </receiver>
+125    </application>
+126
+127</manifest>
