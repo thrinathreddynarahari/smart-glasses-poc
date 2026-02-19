@@ -183,7 +183,7 @@ fun SplashScreen(
             painter = painterResource(id = R.drawable.ranes_logo),
             contentDescription = "Ranes Vision",
             modifier = Modifier
-                .fillMaxWidth(0.65f)
+                .fillMaxWidth(0.75f)
                 .scale(scale.value)
                 .alpha(alpha.value)
                 .offset(y = (-40).dp)

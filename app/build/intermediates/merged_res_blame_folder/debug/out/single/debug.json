@@ -1,23 +1,47 @@
 [
     {
-        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable_launch_background.xml.flat",
+        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\drawable\\launch_background.xml"
     },
     {
-        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable-nodpi_ranesvision.png.flat",
-        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\drawable-nodpi\\ranesvision.png"
+        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable-nodpi_ranesvision1.png.flat",
+        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\drawable-nodpi\\ranesvision1.png"
+    },
+    {
+        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
         "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\drawable\\ic_launcher_foreground.xml"
     },
     {
+        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable_ic_launcher_foreground_1.xml.flat",
+        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\drawable\\ic_launcher_foreground_1.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable_splash_icon.xml.flat",
+        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\drawable\\splash_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable-nodpi_ranesvision.png.flat",
+        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\drawable-nodpi\\ranesvision.png"
+    },
+    {
+        "merged": "com.ranesvision.app-merged_res-70:/drawable-nodpi_ranesvision2.png.flat",
+        "source": "com.ranesvision.app-main-72:/drawable-nodpi/ranesvision2.png"
+    },
+    {
         "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable_ic_launcher_foreground_1.xml.flat",
-        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\drawable\\ic_launcher_foreground_1.xml"
+        "merged": "com.ranesvision.app-merged_res-70:/drawable-nodpi_ranesvision.png.flat",
+        "source": "com.ranesvision.app-main-72:/drawable-nodpi/ranesvision.png"
+    },
+    {
+        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable_ic_launcher_foreground_scaled.xml.flat",
+        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\drawable\\ic_launcher_foreground_scaled.xml"
     },
     {
         "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable_ranes_logo.png.flat",

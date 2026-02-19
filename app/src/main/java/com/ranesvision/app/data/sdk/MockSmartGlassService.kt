@@ -19,18 +19,18 @@ class MockSmartGlassService @Inject constructor() : SmartGlassService {
     private val mockDevices = listOf(
         Device(
             id = "SG-X1-001",
-            name = "SmartGlass X1",
+            name = "MCL G300C",
             signalStrength = -42,
             isConnected = false
         ),
         Device(
             id = "SG-PRO-002",
-            name = "SmartGlass Pro",
+            name = "MCL M02 Ultra",
             signalStrength = -55,
             isConnected = false
         ),
         Device(
-            id = "VAR-LITE-003",
+            id = "MCL X01",
             name = "Vision AR Lite",
             signalStrength = -68,
             isConnected = false

@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.ranesvision.app-mergeDebugResources-68:/values-v31/values-v31.xml",
+            "map": [
+                {
+                    "source": "D:\\Projects\\ranes-poc-3\\app\\src\\main\\res\\values-v31\\themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "14",
+                        "endColumns": "12",
+                        "endOffsets": "858"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "14",
+                        "endColumns": "12",
+                        "endOffsets": "766"
+                    }
+                }
+            ]
+        }
+    ]
+}

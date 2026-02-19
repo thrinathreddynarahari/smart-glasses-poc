@@ -124,15 +124,15 @@ fun DashboardScreen(
                 modifier = Modifier.padding(horizontal = 40.dp)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+//            Spacer(modifier = Modifier.height(16.dp))
 
             // Logo
             Image(
                 painter = painterResource(id = R.drawable.ranes_logo),
                 contentDescription = "Ranes Vision",
                 modifier = Modifier
-                    .fillMaxWidth(0.55f)
-                    .padding(horizontal = 16.dp)
+                    .fillMaxWidth(0.75f)
+                    .padding(horizontal = 10.dp)
                     .clip(RoundedCornerShape(5.dp)),
                 contentScale = ContentScale.FillWidth
             )
