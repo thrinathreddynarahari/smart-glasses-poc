@@ -114,58 +114,58 @@ fun SettingsScreen(
 //            }
 
             // Scan error
-            if (uiState.scanError != null) {
-                item {
-                    GlassCard(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(40.dp)
-                                    .clip(CircleShape)
-                                    .background(ErrorRed.copy(alpha = 0.15f)),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    Icons.Default.Info,
-                                    contentDescription = null,
-                                    tint = ErrorRed,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Text(
-                                text = uiState.scanError!!,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = ErrorRed
-                            )
-                        }
-                    }
-                }
-            }
+//            if (uiState.scanError != null) {
+//                item {
+//                    GlassCard(
+//                        modifier = Modifier.fillMaxWidth()
+//                    ) {
+//                        Row(
+//                            modifier = Modifier
+//                                .fillMaxWidth()
+//                                .padding(16.dp),
+//                            verticalAlignment = Alignment.CenterVertically
+//                        ) {
+//                            Box(
+//                                modifier = Modifier
+//                                    .size(40.dp)
+//                                    .clip(CircleShape)
+//                                    .background(ErrorRed.copy(alpha = 0.15f)),
+//                                contentAlignment = Alignment.Center
+//                            ) {
+//                                Icon(
+//                                    Icons.Default.Info,
+//                                    contentDescription = null,
+//                                    tint = ErrorRed,
+//                                    modifier = Modifier.size(20.dp)
+//                                )
+//                            }
+//                            Spacer(modifier = Modifier.width(12.dp))
+//                            Text(
+//                                text = uiState.scanError!!,
+//                                style = MaterialTheme.typography.bodyMedium,
+//                                color = ErrorRed
+//                            )
+//                        }
+//                    }
+//                }
+//            }
 
             // Scanned devices list
-            if (uiState.scannedDevices.isNotEmpty()) {
-                itemsIndexed(uiState.scannedDevices) { index, device ->
-                    AnimatedVisibility(
-                        visible = true,
-                        enter = fadeIn(tween(300 + index * 100)) +
-                                slideInVertically(tween(300 + index * 100)) { it / 2 }
-                    ) {
-                        DeviceCard(
-                            deviceName = device.name,
-                            signalStrength = device.signalStrength,
-                            onConnect = { /* Connect from settings */ }
-                        )
-                    }
-                }
-            }
+//            if (uiState.scannedDevices.isNotEmpty()) {
+//                itemsIndexed(uiState.scannedDevices) { index, device ->
+//                    AnimatedVisibility(
+//                        visible = true,
+//                        enter = fadeIn(tween(300 + index * 100)) +
+//                                slideInVertically(tween(300 + index * 100)) { it / 2 }
+//                    ) {
+//                        DeviceCard(
+//                            deviceName = device.name,
+//                            signalStrength = device.signalStrength,
+//                            onConnect = { /* Connect from settings */ }
+//                        )
+//                    }
+//                }
+//            }
 
             // Disconnect
 //            item {
@@ -179,83 +179,83 @@ fun SettingsScreen(
 //            }
 
             // Divider
-//            item {
-//                @Suppress("DEPRECATION")
-//                Divider(
-//                    color = GlassBorder,
-//                    thickness = 1.dp
-//                )
-//            }
+            item {
+                @Suppress("DEPRECATION")
+                Divider(
+                    color = GlassBorder,
+                    thickness = 1.dp
+                )
+            }
 
-            // Mode Toggle (Developer Option)
-//            item {
-//                GlassCard(modifier = Modifier.fillMaxWidth()) {
-//                    Row(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(20.dp),
-//                        verticalAlignment = Alignment.CenterVertically
-//                    ) {
-//                        Box(
-//                            modifier = Modifier
-//                                .size(44.dp)
-//                                .clip(CircleShape)
-//                                .background(
-//                                    Brush.linearGradient(
-//                                        colors = listOf(
-//                                            NeonBlueDark,
-//                                            NeonBlue.copy(alpha = 0.3f)
-//                                        )
-//                                    )
-//                                ),
-//                            contentAlignment = Alignment.Center
-//                        ) {
-//                            Icon(
-//                                Icons.Default.Code,
-//                                contentDescription = null,
-//                                tint = NeonBlue,
-//                                modifier = Modifier.size(22.dp)
-//                            )
-//                        }
-//
-//                        Spacer(modifier = Modifier.width(14.dp))
-//
-//                        Column(modifier = Modifier.weight(1f)) {
-//                            Text(
-//                                text = "SDK Mode",
-//                                style = MaterialTheme.typography.titleMedium,
-//                                color = TextPrimary
-//                            )
-//                            Text(
-//                                text = if (currentMode == GlassesMode.REAL) "Live (Real SDK)" else "Simulation (Mock)",
-//                                style = MaterialTheme.typography.bodySmall,
-//                                color = TextMuted
-//                            )
-//                        }
-//
-//                        Switch(
-//                            checked = currentMode == GlassesMode.REAL,
-//                            onCheckedChange = { viewModel.toggleMode(it) },
-//                            colors = SwitchDefaults.colors(
-//                                checkedThumbColor = NeonBlue,
-//                                checkedTrackColor = NeonBlueDark.copy(alpha = 0.5f),
-//                                uncheckedThumbColor = TextMuted,
-//                                uncheckedTrackColor = CardSurface,
-//                                uncheckedBorderColor = GlassBorder
-//                            )
-//                        )
-//                    }
-//                }
-//            }
+//             Mode Toggle (Developer Option)
+            item {
+                GlassCard(modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(20.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(44.dp)
+                                .clip(CircleShape)
+                                .background(
+                                    Brush.linearGradient(
+                                        colors = listOf(
+                                            NeonBlueDark,
+                                            NeonBlue.copy(alpha = 0.3f)
+                                        )
+                                    )
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                Icons.Default.Code,
+                                contentDescription = null,
+                                tint = NeonBlue,
+                                modifier = Modifier.size(22.dp)
+                            )
+                        }
 
-            // Divider
-//            item {
-//                @Suppress("DEPRECATION")
-//                Divider(
-//                    color = GlassBorder,
-//                    thickness = 1.dp
-//                )
-//            }
+                        Spacer(modifier = Modifier.width(14.dp))
+
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = "Live Mode",
+                                style = MaterialTheme.typography.titleMedium,
+                                color = TextPrimary
+                            )
+                            Text(
+                                text = if (currentMode == GlassesMode.REAL) "Live (Real SDK)" else "Simulation",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = TextMuted
+                            )
+                        }
+
+                        Switch(
+                            checked = currentMode == GlassesMode.REAL,
+                            onCheckedChange = { viewModel.toggleMode(it) },
+                            colors = SwitchDefaults.colors(
+                                checkedThumbColor = NeonBlue,
+                                checkedTrackColor = NeonBlueDark.copy(alpha = 0.5f),
+                                uncheckedThumbColor = TextMuted,
+                                uncheckedTrackColor = CardSurface,
+                                uncheckedBorderColor = GlassBorder
+                            )
+                        )
+                    }
+                }
+            }
+
+//             Divider
+            item {
+                @Suppress("DEPRECATION")
+                Divider(
+                    color = GlassBorder,
+                    thickness = 1.dp
+                )
+            }
 
             // App Info
             item {

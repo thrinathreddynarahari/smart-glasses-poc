@@ -67,7 +67,7 @@ fun TagBottomSheet(
                 .padding(bottom = 32.dp)
         ) {
             Text(
-                text = "Manage Tags",
+                text = "Create Tags",
                 style = MaterialTheme.typography.headlineMedium,
                 color = TextPrimary
             )

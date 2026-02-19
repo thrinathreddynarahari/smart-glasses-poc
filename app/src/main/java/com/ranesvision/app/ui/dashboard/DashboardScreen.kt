@@ -248,83 +248,83 @@ private fun ModeToggle(
 ) {
     val isLive = currentMode == GlassesMode.REAL
 
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(44.dp)
-            .clip(RoundedCornerShape(22.dp))
-            .background(CardSurface.copy(alpha = 0.6f))
-            .border(
-                width = 1.dp,
-                brush = Brush.linearGradient(
-                    colors = listOf(
-                        Color.White.copy(alpha = 0.12f),
-                        Color.White.copy(alpha = 0.04f)
-                    )
-                ),
-                shape = RoundedCornerShape(22.dp)
-            )
-    ) {
-        Row(modifier = Modifier.fillMaxSize()) {
-            // Simulation tab
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .height(44.dp)
-                    .clip(RoundedCornerShape(22.dp))
-                    .then(
-                        if (!isLive) Modifier.background(
-                            Brush.horizontalGradient(
-                                colors = listOf(
-                                    NeonBlueDark.copy(alpha = 0.7f),
-                                    NeonBlue.copy(alpha = 0.3f)
-                                )
-                            )
-                        ) else Modifier
-                    )
-                    .clickable { onModeChanged(false) },
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Simulation",
-                    style = MaterialTheme.typography.labelLarge.copy(
-                        fontWeight = if (!isLive) FontWeight.Bold else FontWeight.Normal,
-                        fontSize = 14.sp
-                    ),
-                    color = if (!isLive) TextPrimary else TextMuted
-                )
-            }
-
-            // Live tab
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .height(44.dp)
-                    .clip(RoundedCornerShape(22.dp))
-                    .then(
-                        if (isLive) Modifier.background(
-                            Brush.horizontalGradient(
-                                colors = listOf(
-                                    NeonBlue.copy(alpha = 0.3f),
-                                    NeonBlueDark.copy(alpha = 0.7f)
-                                )
-                            )
-                        ) else Modifier
-                    )
-                    .clickable { onModeChanged(true) },
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Live",
-                    style = MaterialTheme.typography.labelLarge.copy(
-                        fontWeight = if (isLive) FontWeight.Bold else FontWeight.Normal,
-                        fontSize = 14.sp
-                    ),
-                    color = if (isLive) TextPrimary else TextMuted
-                )
-            }
-        }
-    }
+//    Box(
+//        modifier = modifier
+//            .fillMaxWidth()
+//            .height(44.dp)
+//            .clip(RoundedCornerShape(22.dp))
+//            .background(CardSurface.copy(alpha = 0.6f))
+//            .border(
+//                width = 1.dp,
+//                brush = Brush.linearGradient(
+//                    colors = listOf(
+//                        Color.White.copy(alpha = 0.12f),
+//                        Color.White.copy(alpha = 0.04f)
+//                    )
+//                ),
+//                shape = RoundedCornerShape(22.dp)
+//            )
+//    ) {
+//        Row(modifier = Modifier.fillMaxSize()) {
+//            // Simulation tab
+////            Box(
+////                modifier = Modifier
+////                    .weight(1f)
+////                    .height(44.dp)
+////                    .clip(RoundedCornerShape(22.dp))
+////                    .then(
+////                        if (!isLive) Modifier.background(
+////                            Brush.horizontalGradient(
+////                                colors = listOf(
+////                                    NeonBlueDark.copy(alpha = 0.7f),
+////                                    NeonBlue.copy(alpha = 0.3f)
+////                                )
+////                            )
+////                        ) else Modifier
+////                    )
+////                    .clickable { onModeChanged(false) },
+////                contentAlignment = Alignment.Center
+////            ) {
+////                Text(
+////                    text = "Simulation",
+////                    style = MaterialTheme.typography.labelLarge.copy(
+////                        fontWeight = if (!isLive) FontWeight.Bold else FontWeight.Normal,
+////                        fontSize = 14.sp
+////                    ),
+////                    color = if (!isLive) TextPrimary else TextMuted
+////                )
+////            }
+//
+//            // Live tab
+////            Box(
+////                modifier = Modifier
+////                    .weight(1f)
+////                    .height(44.dp)
+////                    .clip(RoundedCornerShape(22.dp))
+////                    .then(
+////                        if (isLive) Modifier.background(
+////                            Brush.horizontalGradient(
+////                                colors = listOf(
+////                                    NeonBlue.copy(alpha = 0.3f),
+////                                    NeonBlueDark.copy(alpha = 0.7f)
+////                                )
+////                            )
+////                        ) else Modifier
+////                    )
+////                    .clickable { onModeChanged(true) },
+////                contentAlignment = Alignment.Center
+////            ) {
+////                Text(
+////                    text = "Live",
+////                    style = MaterialTheme.typography.labelLarge.copy(
+////                        fontWeight = if (isLive) FontWeight.Bold else FontWeight.Normal,
+////                        fontSize = 14.sp
+////                    ),
+////                    color = if (isLive) TextPrimary else TextMuted
+////                )
+////            }
+//        }
+//    }
 }
 
 // ---------------------------------------------------------------------------
