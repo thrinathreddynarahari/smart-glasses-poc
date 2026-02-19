@@ -23,64 +23,76 @@ class DeviceScanner @Inject constructor(
 ) {
 
     suspend fun startScan(): Result<List<Device>> = withContext(Dispatchers.IO) {
+        val foundDevices = java.util.concurrent.ConcurrentHashMap<String, Device>()
+        android.util.Log.d("DeviceScanner", "Starting scan with 10s timeout")
+
         try {
-            val devices = callbackFlow<List<Device>> {
-                val scanCallback = object : ScanWrapperCallback {
-                    
-                    override fun onStart() {
-                        // Scan started
-                    }
-
-                    override fun onStop() {
-                        // Scan stopped
-                    }
-
-                    override fun onParsedData(device: BluetoothDevice?, scanRecord: ScanRecord?) {
-                        // RSSI is not directly available here in signature, assuming handled by onLeScan or default
-                        emitDevice(device, -50) 
-                    }
-
-                    override fun onLeScan(device: BluetoothDevice?, rssi: Int, scanRecord: ByteArray?) {
-                        emitDevice(device, rssi)
-                    }
-
-                    override fun onBatchScanResults(results: MutableList<android.bluetooth.le.ScanResult>?) {
-                         results?.forEach { result ->
-                             emitDevice(result.device, result.rssi)
-                         }
-                    }
-
-                    override fun onScanFailed(errorCode: Int) {
-                        try {
-                            close(Exception("Scan failed with error: $errorCode"))
-                        } catch (e: Exception) {
-                            // Ignore
+            kotlinx.coroutines.withTimeout(10000L) {
+                callbackFlow {
+                    val scanCallback = object : ScanWrapperCallback {
+                        override fun onStart() {
+                            android.util.Log.d("DeviceScanner", "SDK onStart")
                         }
-                    }
 
-                    private fun emitDevice(device: BluetoothDevice?, rssi: Int) {
-                        device?.let {
+                        override fun onStop() {
+                            android.util.Log.d("DeviceScanner", "SDK onStop")
+                        }
+
+                        override fun onParsedData(device: BluetoothDevice?, scanRecord: ScanRecord?) {
+                            // Some SDK versions use this
+                            device?.let { emitDevice(it, -55) }
+                        }
+
+                        override fun onLeScan(device: BluetoothDevice?, rssi: Int, scanRecord: ByteArray?) {
+                            device?.let { emitDevice(it, rssi) }
+                        }
+
+                        override fun onBatchScanResults(results: MutableList<android.bluetooth.le.ScanResult>?) {
+                            results?.forEach { 
+                                emitDevice(it.device, it.rssi) 
+                            }
+                        }
+
+                        override fun onScanFailed(errorCode: Int) {
+                             android.util.Log.e("DeviceScanner", "SDK onScanFailed: $errorCode")
+                             close(Exception("Scan failed with error: $errorCode"))
+                        }
+
+                        private fun emitDevice(device: BluetoothDevice, rssi: Int) {
+                            val id = device.address ?: return
+                            val name = device.name ?: "Unknown Device"
+                            // Filter weak signals or invalid names if needed
                             val mappedDevice = Device(
-                                id = it.address ?: UUID.randomUUID().toString(),
-                                name = it.name ?: "Unknown Device",
+                                id = id,
+                                name = name,
                                 signalStrength = rssi,
                                 isConnected = false
                             )
-                            trySend(listOf(mappedDevice))
+                            trySend(mappedDevice)
                         }
                     }
+
+                    android.util.Log.d("DeviceScanner", "Invoking BleScannerHelper.scanDevice")
+                    BleScannerHelper.getInstance().scanDevice(context, null, scanCallback)
+
+                    awaitClose {
+                        android.util.Log.d("DeviceScanner", "Closing scan flow, stopping scanner")
+                        BleScannerHelper.getInstance().stopScan(context)
+                    }
+                }.collect { device ->
+                    if (!foundDevices.containsKey(device.id)) {
+                        android.util.Log.d("DeviceScanner", "Found device: ${device.name} [${device.id}]")
+                        foundDevices[device.id] = device
+                    }
                 }
-
-                BleScannerHelper.getInstance().scanDevice(context, null, scanCallback)
-
-                awaitClose {
-                    BleScannerHelper.getInstance().stopScan(context)
-                }
-            }.first()
-            
-            Result.success(devices)
-
+            }
+             // Should not be reached due to timeout, unless flow completes (it doesn't)
+             Result.success(foundDevices.values.toList())
+        } catch (e: kotlinx.coroutines.TimeoutCancellationException) {
+            android.util.Log.d("DeviceScanner", "Scan timeout reached. Found ${foundDevices.size} devices.")
+            Result.success(foundDevices.values.toList())
         } catch (e: Exception) {
+            android.util.Log.e("DeviceScanner", "Scan error: ${e.message}", e)
             Result.failure(e)
         }
     }

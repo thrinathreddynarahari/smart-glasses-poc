@@ -1,6 +1,6 @@
 package com.ranesvision.app.di;
 
-import com.ranesvision.app.data.sdk.HeyCyanManager;
+import com.ranesvision.app.data.sdk.GlassDeviceService;
 import com.ranesvision.app.domain.service.SmartGlassService;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -24,23 +24,24 @@ import javax.inject.Provider;
     "KotlinInternalInJava"
 })
 public final class AppModule_ProvideSmartGlassServiceFactory implements Factory<SmartGlassService> {
-  private final Provider<HeyCyanManager> managerProvider;
+  private final Provider<GlassDeviceService> glassDeviceServiceProvider;
 
-  public AppModule_ProvideSmartGlassServiceFactory(Provider<HeyCyanManager> managerProvider) {
-    this.managerProvider = managerProvider;
+  public AppModule_ProvideSmartGlassServiceFactory(
+      Provider<GlassDeviceService> glassDeviceServiceProvider) {
+    this.glassDeviceServiceProvider = glassDeviceServiceProvider;
   }
 
   @Override
   public SmartGlassService get() {
-    return provideSmartGlassService(managerProvider.get());
+    return provideSmartGlassService(glassDeviceServiceProvider.get());
   }
 
   public static AppModule_ProvideSmartGlassServiceFactory create(
-      Provider<HeyCyanManager> managerProvider) {
-    return new AppModule_ProvideSmartGlassServiceFactory(managerProvider);
+      Provider<GlassDeviceService> glassDeviceServiceProvider) {
+    return new AppModule_ProvideSmartGlassServiceFactory(glassDeviceServiceProvider);
   }
 
-  public static SmartGlassService provideSmartGlassService(HeyCyanManager manager) {
-    return Preconditions.checkNotNullFromProvides(AppModule.INSTANCE.provideSmartGlassService(manager));
+  public static SmartGlassService provideSmartGlassService(GlassDeviceService glassDeviceService) {
+    return Preconditions.checkNotNullFromProvides(AppModule.INSTANCE.provideSmartGlassService(glassDeviceService));
   }
 }

@@ -25,36 +25,49 @@ class HeyCyanManager @Inject constructor(
 ) : SmartGlassService {
 
     override suspend fun scanDevices(): Result<List<Device>> = withContext(Dispatchers.IO) {
+        android.util.Log.d("HeyCyanManager", "Starting device scan via SDK...")
         try {
             val result = deviceScanner.startScan()
+            android.util.Log.d("HeyCyanManager", "Scan completed. Found ${result.getOrNull()?.size ?: 0} devices.")
             result
         } catch (e: Exception) {
+            android.util.Log.e("HeyCyanManager", "Scan failed: ${e.message}", e)
             val error = SdkErrorMapper.mapException(e)
             Result.failure(Exception(error.message))
         }
     }
 
     override suspend fun connect(device: Device): Result<Boolean> = withContext(Dispatchers.IO) {
+        android.util.Log.d("HeyCyanManager", "Attempting to connect to device: ${device.name} (${device.id})")
         try {
             val result = deviceConnector.connect(device)
             if (result.isSuccess) {
+                android.util.Log.d("HeyCyanManager", "Connection successful to ${device.name}")
                 deviceConnector.setConnected(device)
+            } else {
+                android.util.Log.w("HeyCyanManager", "Connection failed to ${device.name}")
             }
             result
         } catch (e: Exception) {
+            android.util.Log.e("HeyCyanManager", "Connection error: ${e.message}", e)
             val error = SdkErrorMapper.mapException(e)
             Result.failure(Exception(error.message))
         }
     }
 
     override suspend fun disconnect(): Result<Boolean> = withContext(Dispatchers.IO) {
+        android.util.Log.d("HeyCyanManager", "Disconnecting from current device...")
         try {
             val result = deviceConnector.disconnect()
             if (result.isSuccess) {
+                android.util.Log.d("HeyCyanManager", "Disconnection successful")
                 deviceConnector.clearConnection()
+            } else {
+                android.util.Log.w("HeyCyanManager", "Disconnection failed (or no device connected)")
             }
             result
         } catch (e: Exception) {
+            android.util.Log.e("HeyCyanManager", "Disconnection error: ${e.message}", e)
             val error = SdkErrorMapper.mapException(e)
             Result.failure(Exception(error.message))
         }

@@ -2,6 +2,8 @@ package com.ranesvision.app.ui.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ranesvision.app.data.sdk.GlassesConfig
+import com.ranesvision.app.data.sdk.GlassesMode
 import com.ranesvision.app.domain.model.Device
 import com.ranesvision.app.domain.usecase.DisconnectUseCase
 import com.ranesvision.app.domain.usecase.ScanDevicesUseCase
@@ -30,6 +32,23 @@ class SettingsViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
+
+    /** Observable current mode for the Settings toggle. */
+    val currentMode: StateFlow<GlassesMode> = GlassesConfig.modeFlow
+
+    /**
+     * Switch between Simulation (MOCK) and Live (REAL) modes.
+     * Clears current scan results when switching.
+     */
+    fun toggleMode(isLive: Boolean) {
+        GlassesConfig.mode = if (isLive) GlassesMode.REAL else GlassesMode.MOCK
+        _uiState.update {
+            it.copy(
+                scannedDevices = emptyList(),
+                scanError = null
+            )
+        }
+    }
 
     fun scanDevices() {
         _uiState.update { it.copy(isScanning = true, scanError = null, scannedDevices = emptyList()) }

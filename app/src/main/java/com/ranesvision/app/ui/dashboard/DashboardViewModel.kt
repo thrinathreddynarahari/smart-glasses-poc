@@ -2,6 +2,8 @@ package com.ranesvision.app.ui.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ranesvision.app.data.sdk.GlassesConfig
+import com.ranesvision.app.data.sdk.GlassesMode
 import com.ranesvision.app.domain.model.Device
 import com.ranesvision.app.domain.usecase.ConnectDeviceUseCase
 import com.ranesvision.app.domain.usecase.ScanDevicesUseCase
@@ -20,7 +22,8 @@ data class DashboardUiState(
     val connectingDeviceId: String? = null,
     val connectedDevice: Device? = null,
     val errorMessage: String? = null,
-    val navigateToAlbum: Boolean = false
+    val navigateToAlbum: Boolean = false,
+    val noDevicesFound: Boolean = false
 )
 
 @HiltViewModel
@@ -32,8 +35,34 @@ class DashboardViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(DashboardUiState())
     val uiState: StateFlow<DashboardUiState> = _uiState.asStateFlow()
 
+    /** Observable current mode for the UI toggle. */
+    val currentMode: StateFlow<GlassesMode> = GlassesConfig.modeFlow
+
+    /**
+     * Switch between Simulation (MOCK) and Live (REAL) modes.
+     * Clears current scan results when switching.
+     */
+    fun toggleMode(isLive: Boolean) {
+        GlassesConfig.mode = if (isLive) GlassesMode.REAL else GlassesMode.MOCK
+        _uiState.update {
+            it.copy(
+                showDevices = false,
+                devices = emptyList(),
+                errorMessage = null,
+                noDevicesFound = false
+            )
+        }
+    }
+
     fun startScanning() {
-        _uiState.update { it.copy(isScanning = true, showDevices = false, errorMessage = null) }
+        _uiState.update {
+            it.copy(
+                isScanning = true,
+                showDevices = false,
+                errorMessage = null,
+                noDevicesFound = false
+            )
+        }
 
         viewModelScope.launch {
             val result = scanDevicesUseCase()
@@ -42,8 +71,9 @@ class DashboardViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             isScanning = false,
-                            showDevices = true,
-                            devices = devices
+                            showDevices = devices.isNotEmpty(),
+                            devices = devices,
+                            noDevicesFound = devices.isEmpty()
                         )
                     }
                 },

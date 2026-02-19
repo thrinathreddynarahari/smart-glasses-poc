@@ -48,6 +48,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavGraph(
                         navController = navController,
+                        modifier = Modifier.padding(innerPadding),
                         startDestination = Routes.SPLASH
                     )
                 }

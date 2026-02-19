@@ -1,11 +1,15 @@
 [
     {
-        "merged": "com.ranesvision.app-merged_res-70:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.ranesvision.app-main-72:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "com.ranesvision.app-merged_res-70:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.ranesvision.app-main-72:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-merged_res-70:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Thrinath Narahari\\.gradle\\daemon\\8.5\\com.ranesvision.app-main-72:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
         "merged": "com.ranesvision.app-merged_res-70:/drawable_ic_launcher_foreground.xml.flat",

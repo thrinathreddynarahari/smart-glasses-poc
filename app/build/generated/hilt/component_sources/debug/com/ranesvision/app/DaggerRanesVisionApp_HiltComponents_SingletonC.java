@@ -10,9 +10,15 @@ import com.ranesvision.app.data.local.AppDatabase;
 import com.ranesvision.app.data.local.dao.ImageDao;
 import com.ranesvision.app.data.local.dao.TagDao;
 import com.ranesvision.app.data.repository.AlbumRepository;
+import com.ranesvision.app.data.sdk.DeviceConnector;
+import com.ranesvision.app.data.sdk.DeviceScanner;
+import com.ranesvision.app.data.sdk.GlassDeviceService;
+import com.ranesvision.app.data.sdk.HeyCyanManager;
 import com.ranesvision.app.data.sdk.MockSmartGlassService;
 import com.ranesvision.app.di.AppModule_ProvideAppDatabaseFactory;
 import com.ranesvision.app.di.AppModule_ProvideImageDaoFactory;
+import com.ranesvision.app.di.AppModule_ProvideMockSmartGlassServiceFactory;
+import com.ranesvision.app.di.AppModule_ProvideRealSmartGlassServiceFactory;
 import com.ranesvision.app.di.AppModule_ProvideSmartGlassServiceFactory;
 import com.ranesvision.app.di.AppModule_ProvideTagDaoFactory;
 import com.ranesvision.app.domain.service.SmartGlassService;
@@ -574,6 +580,18 @@ public final class DaggerRanesVisionApp_HiltComponents_SingletonC {
 
     private Provider<MockSmartGlassService> mockSmartGlassServiceProvider;
 
+    private Provider<SmartGlassService> provideMockSmartGlassServiceProvider;
+
+    private Provider<DeviceScanner> deviceScannerProvider;
+
+    private Provider<DeviceConnector> deviceConnectorProvider;
+
+    private Provider<HeyCyanManager> heyCyanManagerProvider;
+
+    private Provider<SmartGlassService> provideRealSmartGlassServiceProvider;
+
+    private Provider<GlassDeviceService> glassDeviceServiceProvider;
+
     private Provider<SmartGlassService> provideSmartGlassServiceProvider;
 
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
@@ -588,7 +606,13 @@ public final class DaggerRanesVisionApp_HiltComponents_SingletonC {
       this.provideImageDaoProvider = DoubleCheck.provider(new SwitchingProvider<ImageDao>(singletonCImpl, 1));
       this.provideTagDaoProvider = DoubleCheck.provider(new SwitchingProvider<TagDao>(singletonCImpl, 3));
       this.albumRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<AlbumRepository>(singletonCImpl, 0));
-      this.mockSmartGlassServiceProvider = DoubleCheck.provider(new SwitchingProvider<MockSmartGlassService>(singletonCImpl, 5));
+      this.mockSmartGlassServiceProvider = DoubleCheck.provider(new SwitchingProvider<MockSmartGlassService>(singletonCImpl, 7));
+      this.provideMockSmartGlassServiceProvider = DoubleCheck.provider(new SwitchingProvider<SmartGlassService>(singletonCImpl, 6));
+      this.deviceScannerProvider = DoubleCheck.provider(new SwitchingProvider<DeviceScanner>(singletonCImpl, 10));
+      this.deviceConnectorProvider = DoubleCheck.provider(new SwitchingProvider<DeviceConnector>(singletonCImpl, 11));
+      this.heyCyanManagerProvider = DoubleCheck.provider(new SwitchingProvider<HeyCyanManager>(singletonCImpl, 9));
+      this.provideRealSmartGlassServiceProvider = DoubleCheck.provider(new SwitchingProvider<SmartGlassService>(singletonCImpl, 8));
+      this.glassDeviceServiceProvider = DoubleCheck.provider(new SwitchingProvider<GlassDeviceService>(singletonCImpl, 5));
       this.provideSmartGlassServiceProvider = DoubleCheck.provider(new SwitchingProvider<SmartGlassService>(singletonCImpl, 4));
     }
 
@@ -638,10 +662,28 @@ public final class DaggerRanesVisionApp_HiltComponents_SingletonC {
           return (T) AppModule_ProvideTagDaoFactory.provideTagDao(singletonCImpl.provideAppDatabaseProvider.get());
 
           case 4: // com.ranesvision.app.domain.service.SmartGlassService 
-          return (T) AppModule_ProvideSmartGlassServiceFactory.provideSmartGlassService(singletonCImpl.mockSmartGlassServiceProvider.get());
+          return (T) AppModule_ProvideSmartGlassServiceFactory.provideSmartGlassService(singletonCImpl.glassDeviceServiceProvider.get());
 
-          case 5: // com.ranesvision.app.data.sdk.MockSmartGlassService 
+          case 5: // com.ranesvision.app.data.sdk.GlassDeviceService 
+          return (T) new GlassDeviceService(singletonCImpl.provideMockSmartGlassServiceProvider.get(), singletonCImpl.provideRealSmartGlassServiceProvider.get());
+
+          case 6: // @javax.inject.Named("mock") com.ranesvision.app.domain.service.SmartGlassService 
+          return (T) AppModule_ProvideMockSmartGlassServiceFactory.provideMockSmartGlassService(singletonCImpl.mockSmartGlassServiceProvider.get());
+
+          case 7: // com.ranesvision.app.data.sdk.MockSmartGlassService 
           return (T) new MockSmartGlassService();
+
+          case 8: // @javax.inject.Named("real") com.ranesvision.app.domain.service.SmartGlassService 
+          return (T) AppModule_ProvideRealSmartGlassServiceFactory.provideRealSmartGlassService(singletonCImpl.heyCyanManagerProvider.get());
+
+          case 9: // com.ranesvision.app.data.sdk.HeyCyanManager 
+          return (T) new HeyCyanManager(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule), singletonCImpl.deviceScannerProvider.get(), singletonCImpl.deviceConnectorProvider.get());
+
+          case 10: // com.ranesvision.app.data.sdk.DeviceScanner 
+          return (T) new DeviceScanner(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 11: // com.ranesvision.app.data.sdk.DeviceConnector 
+          return (T) new DeviceConnector(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
           default: throw new AssertionError(id);
         }

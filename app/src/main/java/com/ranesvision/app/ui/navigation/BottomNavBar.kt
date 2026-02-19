@@ -5,10 +5,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Image
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Image
-import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -40,20 +40,20 @@ val bottomNavItems = listOf(
     BottomNavItem(
         route = Routes.HOME,
         label = "Home",
-        selectedIcon = Icons.Filled.Home,
+        selectedIcon = Icons.Outlined.Home, // User requested modern outlined icons
         unselectedIcon = Icons.Outlined.Home
     ),
     BottomNavItem(
         route = Routes.ALBUM,
         label = "Album",
-        selectedIcon = Icons.Filled.Image,
+        selectedIcon = Icons.Outlined.Image,
         unselectedIcon = Icons.Outlined.Image
     ),
     BottomNavItem(
-        route = Routes.PROFILE,
-        label = "My profile",
-        selectedIcon = Icons.Filled.Person,
-        unselectedIcon = Icons.Outlined.Person
+        route = Routes.PROFILE, // Utilizing existing route constant but changing UI label
+        label = "Settings",
+        selectedIcon = Icons.Outlined.Settings,
+        unselectedIcon = Icons.Outlined.Settings
     )
 )
 
@@ -66,7 +66,7 @@ fun BottomNavBar(
     val currentRoute = navBackStackEntry?.destination?.route
 
     NavigationBar(
-        modifier = modifier.height(72.dp),
+        modifier = modifier, // Removed fixed height to let it wrap content comfortably (default 80dp)
         containerColor = DeepNavy.copy(alpha = 0.95f),
         contentColor = TextPrimary,
         tonalElevation = 0.dp

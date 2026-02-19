@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.ranesvision.app.data.local.AppDatabase
 import com.ranesvision.app.data.local.dao.ImageDao
 import com.ranesvision.app.data.local.dao.TagDao
+import com.ranesvision.app.data.sdk.GlassDeviceService
 import com.ranesvision.app.data.sdk.HeyCyanManager
 import com.ranesvision.app.data.sdk.MockSmartGlassService
 import com.ranesvision.app.domain.service.SmartGlassService
@@ -13,6 +14,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -43,26 +45,33 @@ object AppModule {
         return database.tagDao()
     }
 
-    /**
-     * Helper to switch between Mock and Real SDK.
-     * Currently set to Real SDK (HeyCyanManager).
-     */
     @Provides
     @Singleton
-    fun provideSmartGlassService(
-        manager: HeyCyanManager
-    ): SmartGlassService {
-        return manager
-    }
-    
-    // Uncomment for Mock service:
-    /*
-    @Provides
-    @Singleton
-    fun provideSmartGlassService(
+    @Named("mock")
+    fun provideMockSmartGlassService(
         mockService: MockSmartGlassService
     ): SmartGlassService {
         return mockService
     }
-    */
+
+    @Provides
+    @Singleton
+    @Named("real")
+    fun provideRealSmartGlassService(
+        realManager: HeyCyanManager
+    ): SmartGlassService {
+        return realManager
+    }
+
+    /**
+     * Primary SmartGlassService binding. GlassDeviceService delegates
+     * to mock or real at runtime based on GlassesConfig.mode.
+     */
+    @Provides
+    @Singleton
+    fun provideSmartGlassService(
+        glassDeviceService: GlassDeviceService
+    ): SmartGlassService {
+        return glassDeviceService
+    }
 }
