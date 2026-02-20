@@ -30,8 +30,8 @@ class MockSmartGlassService @Inject constructor() : SmartGlassService {
             isConnected = false
         ),
         Device(
-            id = "MCL X01",
-            name = "Vision AR Lite",
+            id = "MCL-X01",
+            name = "MCL X01",
             signalStrength = -68,
             isConnected = false
         )
