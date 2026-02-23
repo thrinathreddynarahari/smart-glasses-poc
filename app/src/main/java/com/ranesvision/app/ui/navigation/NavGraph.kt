@@ -11,12 +11,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.ranesvision.app.ui.album.AlbumScreen
 import com.ranesvision.app.ui.dashboard.DashboardScreen
+import com.ranesvision.app.ui.logit.LogItScreen
 import com.ranesvision.app.ui.settings.SettingsScreen
 import com.ranesvision.app.ui.splash.SplashScreen
 
 object Routes {
     const val SPLASH = "splash"
     const val HOME = "home"
+    const val LOG_IT = "logit"
     const val ALBUM = "album"
     const val PROFILE = "profile"
 }
@@ -64,6 +66,14 @@ fun NavGraph(
             exitTransition = { fadeOut(tween(200)) }
         ) {
             AlbumScreen()
+        }
+
+        composable(
+            Routes.LOG_IT,
+            enterTransition = { fadeIn(tween(400)) },
+            exitTransition = { fadeOut(tween(200)) }
+        ) {
+            LogItScreen()
         }
 
         composable(

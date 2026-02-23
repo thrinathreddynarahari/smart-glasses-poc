@@ -13,6 +13,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import com.ranesvision.app.data.local.dao.ImageDao;
 import com.ranesvision.app.data.local.dao.ImageDao_Impl;
+import com.ranesvision.app.data.local.dao.LogItDao;
+import com.ranesvision.app.data.local.dao.LogItDao_Impl;
 import com.ranesvision.app.data.local.dao.TagDao;
 import com.ranesvision.app.data.local.dao.TagDao_Impl;
 import java.lang.Class;
@@ -20,6 +22,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -34,17 +37,22 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   private volatile TagDao _tagDao;
 
+  private volatile LogItDao _logItDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `images` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `filePath` TEXT NOT NULL, `thumbnailPath` TEXT, `timestamp` INTEGER NOT NULL, `width` INTEGER NOT NULL, `height` INTEGER NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `tags` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `image_tag_cross_ref` (`imageId` INTEGER NOT NULL, `tagId` INTEGER NOT NULL, PRIMARY KEY(`imageId`, `tagId`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `logit_entries` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `timestamp` INTEGER NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `logit_images` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `entryId` INTEGER NOT NULL, `imagePath` TEXT NOT NULL, `comment` TEXT NOT NULL, `sortOrder` INTEGER NOT NULL, FOREIGN KEY(`entryId`) REFERENCES `logit_entries`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_logit_images_entryId` ON `logit_images` (`entryId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a2843f6c16e4fdbaa2ce3764c5b13c40')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '195328f35afac37521e0d720099db056')");
       }
 
       @Override
@@ -52,6 +60,8 @@ public final class AppDatabase_Impl extends AppDatabase {
         db.execSQL("DROP TABLE IF EXISTS `images`");
         db.execSQL("DROP TABLE IF EXISTS `tags`");
         db.execSQL("DROP TABLE IF EXISTS `image_tag_cross_ref`");
+        db.execSQL("DROP TABLE IF EXISTS `logit_entries`");
+        db.execSQL("DROP TABLE IF EXISTS `logit_images`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -73,6 +83,7 @@ public final class AppDatabase_Impl extends AppDatabase {
       @Override
       public void onOpen(@NonNull final SupportSQLiteDatabase db) {
         mDatabase = db;
+        db.execSQL("PRAGMA foreign_keys = ON");
         internalInitInvalidationTracker(db);
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
@@ -135,9 +146,39 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoImageTagCrossRef + "\n"
                   + " Found:\n" + _existingImageTagCrossRef);
         }
+        final HashMap<String, TableInfo.Column> _columnsLogitEntries = new HashMap<String, TableInfo.Column>(3);
+        _columnsLogitEntries.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLogitEntries.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLogitEntries.put("timestamp", new TableInfo.Column("timestamp", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysLogitEntries = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesLogitEntries = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoLogitEntries = new TableInfo("logit_entries", _columnsLogitEntries, _foreignKeysLogitEntries, _indicesLogitEntries);
+        final TableInfo _existingLogitEntries = TableInfo.read(db, "logit_entries");
+        if (!_infoLogitEntries.equals(_existingLogitEntries)) {
+          return new RoomOpenHelper.ValidationResult(false, "logit_entries(com.ranesvision.app.data.local.entity.LogItEntryEntity).\n"
+                  + " Expected:\n" + _infoLogitEntries + "\n"
+                  + " Found:\n" + _existingLogitEntries);
+        }
+        final HashMap<String, TableInfo.Column> _columnsLogitImages = new HashMap<String, TableInfo.Column>(5);
+        _columnsLogitImages.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLogitImages.put("entryId", new TableInfo.Column("entryId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLogitImages.put("imagePath", new TableInfo.Column("imagePath", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLogitImages.put("comment", new TableInfo.Column("comment", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsLogitImages.put("sortOrder", new TableInfo.Column("sortOrder", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysLogitImages = new HashSet<TableInfo.ForeignKey>(1);
+        _foreignKeysLogitImages.add(new TableInfo.ForeignKey("logit_entries", "CASCADE", "NO ACTION", Arrays.asList("entryId"), Arrays.asList("id")));
+        final HashSet<TableInfo.Index> _indicesLogitImages = new HashSet<TableInfo.Index>(1);
+        _indicesLogitImages.add(new TableInfo.Index("index_logit_images_entryId", false, Arrays.asList("entryId"), Arrays.asList("ASC")));
+        final TableInfo _infoLogitImages = new TableInfo("logit_images", _columnsLogitImages, _foreignKeysLogitImages, _indicesLogitImages);
+        final TableInfo _existingLogitImages = TableInfo.read(db, "logit_images");
+        if (!_infoLogitImages.equals(_existingLogitImages)) {
+          return new RoomOpenHelper.ValidationResult(false, "logit_images(com.ranesvision.app.data.local.entity.LogItImageEntity).\n"
+                  + " Expected:\n" + _infoLogitImages + "\n"
+                  + " Found:\n" + _existingLogitImages);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "a2843f6c16e4fdbaa2ce3764c5b13c40", "434f8712093166fe2400a92b0ad4fcd6");
+    }, "195328f35afac37521e0d720099db056", "54df0e991031c43cdac8a37729b0e9ec");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -148,21 +189,33 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "images","tags","image_tag_cross_ref");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "images","tags","image_tag_cross_ref","logit_entries","logit_images");
   }
 
   @Override
   public void clearAllTables() {
     super.assertNotMainThread();
     final SupportSQLiteDatabase _db = super.getOpenHelper().getWritableDatabase();
+    final boolean _supportsDeferForeignKeys = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP;
     try {
+      if (!_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA foreign_keys = FALSE");
+      }
       super.beginTransaction();
+      if (_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA defer_foreign_keys = TRUE");
+      }
       _db.execSQL("DELETE FROM `images`");
       _db.execSQL("DELETE FROM `tags`");
       _db.execSQL("DELETE FROM `image_tag_cross_ref`");
+      _db.execSQL("DELETE FROM `logit_entries`");
+      _db.execSQL("DELETE FROM `logit_images`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
+      if (!_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA foreign_keys = TRUE");
+      }
       _db.query("PRAGMA wal_checkpoint(FULL)").close();
       if (!_db.inTransaction()) {
         _db.execSQL("VACUUM");
@@ -176,6 +229,7 @@ public final class AppDatabase_Impl extends AppDatabase {
     final HashMap<Class<?>, List<Class<?>>> _typeConvertersMap = new HashMap<Class<?>, List<Class<?>>>();
     _typeConvertersMap.put(ImageDao.class, ImageDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(TagDao.class, TagDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(LogItDao.class, LogItDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -218,6 +272,20 @@ public final class AppDatabase_Impl extends AppDatabase {
           _tagDao = new TagDao_Impl(this);
         }
         return _tagDao;
+      }
+    }
+  }
+
+  @Override
+  public LogItDao logItDao() {
+    if (_logItDao != null) {
+      return _logItDao;
+    } else {
+      synchronized(this) {
+        if(_logItDao == null) {
+          _logItDao = new LogItDao_Impl(this);
+        }
+        return _logItDao;
       }
     }
   }

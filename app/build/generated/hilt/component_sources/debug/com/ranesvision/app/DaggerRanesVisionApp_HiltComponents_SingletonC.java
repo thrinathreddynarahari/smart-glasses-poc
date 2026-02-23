@@ -8,8 +8,10 @@ import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 import com.ranesvision.app.data.local.AppDatabase;
 import com.ranesvision.app.data.local.dao.ImageDao;
+import com.ranesvision.app.data.local.dao.LogItDao;
 import com.ranesvision.app.data.local.dao.TagDao;
 import com.ranesvision.app.data.repository.AlbumRepository;
+import com.ranesvision.app.data.repository.LogItRepository;
 import com.ranesvision.app.data.sdk.DeviceConnector;
 import com.ranesvision.app.data.sdk.DeviceScanner;
 import com.ranesvision.app.data.sdk.GlassDeviceService;
@@ -17,6 +19,7 @@ import com.ranesvision.app.data.sdk.HeyCyanManager;
 import com.ranesvision.app.data.sdk.MockSmartGlassService;
 import com.ranesvision.app.di.AppModule_ProvideAppDatabaseFactory;
 import com.ranesvision.app.di.AppModule_ProvideImageDaoFactory;
+import com.ranesvision.app.di.AppModule_ProvideLogItDaoFactory;
 import com.ranesvision.app.di.AppModule_ProvideMockSmartGlassServiceFactory;
 import com.ranesvision.app.di.AppModule_ProvideRealSmartGlassServiceFactory;
 import com.ranesvision.app.di.AppModule_ProvideSmartGlassServiceFactory;
@@ -29,6 +32,8 @@ import com.ranesvision.app.ui.album.AlbumViewModel;
 import com.ranesvision.app.ui.album.AlbumViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.ranesvision.app.ui.dashboard.DashboardViewModel;
 import com.ranesvision.app.ui.dashboard.DashboardViewModel_HiltModules_KeyModule_ProvideFactory;
+import com.ranesvision.app.ui.logit.LogItViewModel;
+import com.ranesvision.app.ui.logit.LogItViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.ranesvision.app.ui.settings.SettingsViewModel;
 import com.ranesvision.app.ui.settings.SettingsViewModel_HiltModules_KeyModule_ProvideFactory;
 import dagger.hilt.android.ActivityRetainedLifecycle;
@@ -388,7 +393,7 @@ public final class DaggerRanesVisionApp_HiltComponents_SingletonC {
 
     @Override
     public Set<String> getViewModelKeys() {
-      return SetBuilder.<String>newSetBuilder(3).add(AlbumViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(DashboardViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(SettingsViewModel_HiltModules_KeyModule_ProvideFactory.provide()).build();
+      return SetBuilder.<String>newSetBuilder(4).add(AlbumViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(DashboardViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(LogItViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(SettingsViewModel_HiltModules_KeyModule_ProvideFactory.provide()).build();
     }
 
     @Override
@@ -417,6 +422,8 @@ public final class DaggerRanesVisionApp_HiltComponents_SingletonC {
     private Provider<AlbumViewModel> albumViewModelProvider;
 
     private Provider<DashboardViewModel> dashboardViewModelProvider;
+
+    private Provider<LogItViewModel> logItViewModelProvider;
 
     private Provider<SettingsViewModel> settingsViewModelProvider;
 
@@ -447,12 +454,13 @@ public final class DaggerRanesVisionApp_HiltComponents_SingletonC {
         final ViewModelLifecycle viewModelLifecycleParam) {
       this.albumViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
       this.dashboardViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 1);
-      this.settingsViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 2);
+      this.logItViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 2);
+      this.settingsViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 3);
     }
 
     @Override
     public Map<String, javax.inject.Provider<ViewModel>> getHiltViewModelMap() {
-      return MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(3).put("com.ranesvision.app.ui.album.AlbumViewModel", ((Provider) albumViewModelProvider)).put("com.ranesvision.app.ui.dashboard.DashboardViewModel", ((Provider) dashboardViewModelProvider)).put("com.ranesvision.app.ui.settings.SettingsViewModel", ((Provider) settingsViewModelProvider)).build();
+      return MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(4).put("com.ranesvision.app.ui.album.AlbumViewModel", ((Provider) albumViewModelProvider)).put("com.ranesvision.app.ui.dashboard.DashboardViewModel", ((Provider) dashboardViewModelProvider)).put("com.ranesvision.app.ui.logit.LogItViewModel", ((Provider) logItViewModelProvider)).put("com.ranesvision.app.ui.settings.SettingsViewModel", ((Provider) settingsViewModelProvider)).build();
     }
 
     @Override
@@ -487,7 +495,10 @@ public final class DaggerRanesVisionApp_HiltComponents_SingletonC {
           case 1: // com.ranesvision.app.ui.dashboard.DashboardViewModel 
           return (T) new DashboardViewModel(viewModelCImpl.scanDevicesUseCase(), viewModelCImpl.connectDeviceUseCase());
 
-          case 2: // com.ranesvision.app.ui.settings.SettingsViewModel 
+          case 2: // com.ranesvision.app.ui.logit.LogItViewModel 
+          return (T) new LogItViewModel(singletonCImpl.logItRepositoryProvider.get(), ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 3: // com.ranesvision.app.ui.settings.SettingsViewModel 
           return (T) new SettingsViewModel(viewModelCImpl.scanDevicesUseCase(), viewModelCImpl.disconnectUseCase());
 
           default: throw new AssertionError(id);
@@ -594,6 +605,10 @@ public final class DaggerRanesVisionApp_HiltComponents_SingletonC {
 
     private Provider<SmartGlassService> provideSmartGlassServiceProvider;
 
+    private Provider<LogItDao> provideLogItDaoProvider;
+
+    private Provider<LogItRepository> logItRepositoryProvider;
+
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
       initialize(applicationContextModuleParam);
@@ -614,6 +629,8 @@ public final class DaggerRanesVisionApp_HiltComponents_SingletonC {
       this.provideRealSmartGlassServiceProvider = DoubleCheck.provider(new SwitchingProvider<SmartGlassService>(singletonCImpl, 8));
       this.glassDeviceServiceProvider = DoubleCheck.provider(new SwitchingProvider<GlassDeviceService>(singletonCImpl, 5));
       this.provideSmartGlassServiceProvider = DoubleCheck.provider(new SwitchingProvider<SmartGlassService>(singletonCImpl, 4));
+      this.provideLogItDaoProvider = DoubleCheck.provider(new SwitchingProvider<LogItDao>(singletonCImpl, 13));
+      this.logItRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<LogItRepository>(singletonCImpl, 12));
     }
 
     @Override
@@ -684,6 +701,12 @@ public final class DaggerRanesVisionApp_HiltComponents_SingletonC {
 
           case 11: // com.ranesvision.app.data.sdk.DeviceConnector 
           return (T) new DeviceConnector(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 12: // com.ranesvision.app.data.repository.LogItRepository 
+          return (T) new LogItRepository(singletonCImpl.provideLogItDaoProvider.get());
+
+          case 13: // com.ranesvision.app.data.local.dao.LogItDao 
+          return (T) AppModule_ProvideLogItDaoFactory.provideLogItDao(singletonCImpl.provideAppDatabaseProvider.get());
 
           default: throw new AssertionError(id);
         }

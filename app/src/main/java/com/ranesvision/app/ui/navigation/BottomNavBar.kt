@@ -6,6 +6,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Description
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.Settings
@@ -42,6 +43,12 @@ val bottomNavItems = listOf(
         label = "Home",
         selectedIcon = Icons.Outlined.Home, // User requested modern outlined icons
         unselectedIcon = Icons.Outlined.Home
+    ),
+    BottomNavItem(
+        route = Routes.LOG_IT,
+        label = "LOG-IT",
+        selectedIcon = Icons.Outlined.Description,
+        unselectedIcon = Icons.Outlined.Description
     ),
     BottomNavItem(
         route = Routes.ALBUM,

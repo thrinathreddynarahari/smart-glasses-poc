@@ -3,6 +3,7 @@ package com.ranesvision.app;
 import com.ranesvision.app.di.AppModule;
 import com.ranesvision.app.ui.album.AlbumViewModel_HiltModules;
 import com.ranesvision.app.ui.dashboard.DashboardViewModel_HiltModules;
+import com.ranesvision.app.ui.logit.LogItViewModel_HiltModules;
 import com.ranesvision.app.ui.settings.SettingsViewModel_HiltModules;
 import dagger.Binds;
 import dagger.Component;
@@ -159,6 +160,7 @@ public final class RanesVisionApp_HiltComponents {
           DashboardViewModel_HiltModules.KeyModule.class,
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
           HiltWrapper_SavedStateHandleModule.class,
+          LogItViewModel_HiltModules.KeyModule.class,
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class,
           SettingsViewModel_HiltModules.KeyModule.class
@@ -200,6 +202,7 @@ public final class RanesVisionApp_HiltComponents {
           AlbumViewModel_HiltModules.BindsModule.class,
           DashboardViewModel_HiltModules.BindsModule.class,
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
+          LogItViewModel_HiltModules.BindsModule.class,
           SettingsViewModel_HiltModules.BindsModule.class
       }
   )

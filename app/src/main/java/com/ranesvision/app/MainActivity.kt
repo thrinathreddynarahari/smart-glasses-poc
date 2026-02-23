@@ -33,6 +33,7 @@ class MainActivity : ComponentActivity() {
 
                 val showBottomBar = currentRoute in listOf(
                     Routes.HOME,
+                    Routes.LOG_IT,
                     Routes.ALBUM,
                     Routes.PROFILE
                 )
